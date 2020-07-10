@@ -1,34 +1,68 @@
 // babel src/playground/build-it-visible.js --out-file=public/scripts/app.js --presets=env,react --watch
+class VisibilityToggle extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleToggleVisibility = this.handleToggleVisibility.bind(this)
+        this.state = {
+            visibility: false
+        }
 
-const app = {
-    title: 'Visibility Toggle'
+    }
+    handleToggleVisibility() {
+        this.setState((prevState) => {
+            return {
+                visibility: !prevState.visibility,
+            }
+           
+        })
+    }
+    render() {
+        return (
+            <div>
+                <h1>Visibility Toggle</h1>
+                <button onClick={this.handleToggleVisibility}>
+                    {this.state.visibility ? 'Hide Details' : 'Show Details'}
+                </button>
+                {this.state.visibility && (
+                    <div>  
+                        <p>Hey. These are some details you can now See!</p>
+                    </div>
+                )}
+            </div>
+        )
+    }
 }
 
-const toggleVisibility = (e) => {
-    visibility = !visibility;
-    render()
-};
+ReactDOM.render(<VisibilityToggle />, document.getElementById('app'))
+// const app = {
+//     title: 'Visibility Toggle'
+// }
 
-let visibility = false;
+// const toggleVisibility = (e) => {
+//     visibility = !visibility;
+//     render()
+// };
 
-const appRoot = document.getElementById('app')
+// let visibility = false;
 
-const render = () => {
-    const template = (
-        <div>
-            <h1>{app.title}</h1>
-            <button onClick={toggleVisibility}>
-                {visibility ? 'Hide details' : 'Show Details'}
-            </button>
-            {visibility && (
-                <div>
-                    <p>Hey. These are some details you can now See!</p>
-                </div>
-            )}
-        </div>
-    )
+// const appRoot = document.getElementById('app')
 
-    ReactDOM.render(template, appRoot)
-}
+// const render = () => {
+//     const template = (
+//         <div>
+//             <h1>{app.title}</h1>
+//             <button onClick={toggleVisibility}>
+//                 {visibility ? 'Hide details' : 'Show Details'}
+//             </button>
+//             {visibility && (
+//                 <div>
+//                     <p>Hey. These are some details you can now See!</p>
+//                 </div>
+//             )}
+//         </div>
+//     )
 
-render()
+//     ReactDOM.render(template, appRoot)
+// }
+
+// render()
